@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 export const Projects = () => {
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [newProjectName, setNewProjectName] = useState('');
   const [query, setQuery] = useState('');
@@ -70,16 +72,34 @@ export const Projects = () => {
                 }}
               >
                 <span>{p.name}</span>
-                {/* Placeholder actions for future navigation or details */}
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button type="button" onClick={() => alert(`Open ${p.name}`)}>
-                    Open
+                  <button 
+                    type="button" 
+                    onClick={() => navigate(`/projects/${p.id}`)}
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: '#007bff',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    View Details
                   </button>
                   <button
                     type="button"
                     onClick={() =>
                       setProjects(prev => prev.filter(x => x.id !== p.id))
                     }
+                    style={{
+                      padding: '0.5rem 1rem',
+                      background: '#dc3545',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: 'pointer'
+                    }}
                   >
                     Delete
                   </button>
